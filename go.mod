@@ -108,4 +108,6 @@ require (
 	golang.org/x/tools v0.0.0-20200522201501-cb1345f3a375 // indirect
 )
 
+replace github.com/ipfs/go-filestore => github.com/jbarthelmes/go-filestore v0.0.3-patch
+
 go 1.13
