@@ -17,5 +17,7 @@ jobs:
         id: go
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: master
       - name: Make
         run: make build
