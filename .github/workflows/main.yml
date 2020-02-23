@@ -7,11 +7,11 @@ on:
 
 jobs:
   build:
-    name: make build ${{ matrix.platform }}
+    name: Makefile build ${{ matrix.platform[0] }}-${{ matrix.platform[1] }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform:
+        platform: # list from go-ipfs/mk/utils.mk
           - ['windows', '386']
           - ['windows', 'amd64']
           - ['linux', 'arm']
@@ -35,8 +35,10 @@ jobs:
         with:
           ref: master
       - run: make build GOOS=${{ matrix.platform[0] }} GOARCH=${{ matrix.platform[1] }}
-      - run: mkdir -p _out
-      - run: cp cmd/ipfs/ipfs{,.exe} _out
+      - run: |
+          mkdir -p _out
+          cp cmd/ipfs/ipfs _out || true
+          cp cmd/ipfs/ipfs.exe _out || true
       - uses: actions/upload-artifact@v1
         with:
           name: ipfs-${{ matrix.platform[0] }}-${{ matrix.platform[1] }}
