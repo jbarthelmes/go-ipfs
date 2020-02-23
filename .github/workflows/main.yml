@@ -10,14 +10,15 @@ jobs:
     name: Makefile build
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.13
-        uses: actions/setup-go@v1
+      - uses: actions/setup-go@v1
         with:
           go-version: 1.13
         id: go
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           ref: master
-      - name: Make
-        run: make build
+      - run: make build
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ipfs
+          path: cmd/ipfs/ipfs
