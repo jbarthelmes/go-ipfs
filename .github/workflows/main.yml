@@ -34,7 +34,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-      - run: make build GOOS=${{ matrix.platform[0] }} GOARCH=${{ matrix.platform[1] }}
+      - run: |
+          export GONOSUMDB=github.com/jbarthelmes
+          make build GOOS=${{ matrix.platform[0] }} GOARCH=${{ matrix.platform[1] }}
       - run: |
           mkdir -p _out
           cp cmd/ipfs/ipfs _out || true
