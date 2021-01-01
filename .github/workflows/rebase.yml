@@ -3,6 +3,7 @@ name: Rebase onto upstream
 on:
   push:
     branches:
+      - master
       - github-actions
   schedule:
     - cron: "15 14 * * *"
